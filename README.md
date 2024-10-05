@@ -43,13 +43,13 @@ To get started, clone this repository to your local machine:
 git clone https://github.com/yourusername/Mechanical_Eye_Project.git
 cd Mechanical_Eye_Project
 ```
-# Install the Dependencies: 
+## Install the Dependencies: 
 Install the Python libraries as described in the Requirements section.
 
 Download the Shape Predictor File: Download the pre-trained shape_predictor_68_face_landmarks.dat file from here and place it in the project directory.
 (https://sourceforge.net/projects/dclib/)
 
-# Connect the Arduino:
+## Connect the Arduino:
 
 - Connect the servos to pins 5, 6, and 7 on your Arduino.
 - Connect the Arduino to your computer.
