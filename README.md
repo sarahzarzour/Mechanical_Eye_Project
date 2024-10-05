@@ -54,19 +54,23 @@ Download the Shape Predictor File: Download the pre-trained shape_predictor_68_f
 - Connect the servos to pins 5, 6, and 7 on your Arduino.
 - Connect the Arduino to your computer.
 - Uncomment the pyfirmata2 section in the code to enable servo control.
+- 
 ## 🖨️ 3D Printing
 The project includes STL files for printing mechanical eyes. These can be found in the models folder.
  Instructions:
 - Download the files.
 - Use a 3D printer to create the mechanical eye model.
 - Assemble the parts and attach the servos to the eye components.
+- Instead of the PlaceHolderEye parts we made a clay replica and painted it to make it look more realistic..you can either 3D print it or make it.
+  
 ## 🛠️Troubleshooting
 - Webcam Issues: If the webcam doesn't start, ensure it's properly connected and recognized by your system.
 - Empty Eye Frames: This error occurs if the eyes are not detected. Ensure the camera captures your face clearly and adjust the lighting conditions.
 - Arduino Not Detected: If using Arduino, ensure you’ve connected the right port and the servos are wired correctly.
 
-Feel free to contribute to the project by submitting issues or pull requests!
 
+Feel free to contribute to the project by submitting issues or pull requests!
+Most importantly , learn and have fun!! :3
 
 
 
