@@ -1,16 +1,15 @@
 import cv2
 import dlib
 import numpy as np
-# import pyfirmata2
+import pyfirmata2
 
-# PORT =  pyfirmata2.Arduino.AUTODETECT
-# board = pyfirmata2.Arduino(PORT)
-# servo_5 = board.get_pin('d:5:s')
-# servo_6 = board.get_pin('d:6:s')
-# servo_7 = board.get_pin('d:7:s')
+PORT =  pyfirmata2.Arduino.AUTODETECT
+board = pyfirmata2.Arduino(PORT)
+servo_5 = board.get_pin('d:9:s') #left and right
+servo_6 = board.get_pin('d:6:s') #left green
+servo_7 = board.get_pin('d:5:s') #right brown
 
-
-
+ 
 # Load the pre-trained facial landmark detector
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
@@ -43,7 +42,6 @@ def eye_aspect_ratio(eye):
 EAR_THRESHOLD = 0.25
 CONSEC_FRAMES = 3
 blink_counter = 0
-
 # Webcam capture
 cap = cv2.VideoCapture(0)
 
@@ -109,13 +107,13 @@ while True:
 
                     if left_pupil_x < landmarks.part(36).x + 0.35 * left_eye_width and right_pupil_x < landmarks.part(42).x + 0.35 * right_eye_width:
                         cv2.putText(frame, "Looking Right", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
-                        # servo_5.write(0)
+                        servo_5.write(10)
                     elif left_pupil_x > landmarks.part(36).x + 0.65 * left_eye_width and right_pupil_x > landmarks.part(42).x + 0.65 * right_eye_width:
                         cv2.putText(frame, "Looking Left", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
-                        # servo_5.write(60)
+                        servo_5.write(110)
                     else:
                         cv2.putText(frame, "Looking Center", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
-                        # servo_5.write(30)
+                        servo_5.write(60)
             else:
                 print("Empty eye frames detected.")
         except Exception as e:
@@ -124,25 +122,27 @@ while True:
         # Blink or wink detection
         if left_ear < EAR_THRESHOLD and right_ear >= EAR_THRESHOLD:
             cv2.putText(frame, "Winking Left", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
-            # servo_6.write(30)
+            servo_6.write(0) #60
         elif right_ear < EAR_THRESHOLD and left_ear >= EAR_THRESHOLD:
             cv2.putText(frame, "Winking Right", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
-            # servo_7.write(30)
+            servo_7.write(45)
         elif left_ear < EAR_THRESHOLD and right_ear < EAR_THRESHOLD:
             blink_counter += 1
             if blink_counter >= CONSEC_FRAMES:
                 cv2.putText(frame, "Blinking", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
-                # servo_6.write(30)
-                # servo_7.write(30)
+                servo_6.write(0)
+                servo_7.write(45)
                 
         else:
+            servo_6.write(60)
+            servo_7.write(0) 
             blink_counter = 0
 
     # Show the frame
     cv2.imshow("Frame", frame)
 
     # Break the loop on 'q' key press
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('x'):
         break
 
 # Release the webcam and close windows
