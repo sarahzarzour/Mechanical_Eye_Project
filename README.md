@@ -46,12 +46,12 @@ cd Mechanical_Eye_Project
 ## Install the Dependencies: 
 Install the Python libraries as described in the Requirements section.
 
-Download the Shape Predictor File: Download the pre-trained shape_predictor_68_face_landmarks.dat file from here and place it in the project directory.
-(https://sourceforge.net/projects/dclib/)
+Shape Predictor File was taken from: 
+(https://sourceforge.net/projects/dclib/) as the shape_predictor_68_face_landmarks.dat 
 
 ## Connect the Arduino:
 
-- Connect the servos to pins 5, 6, and 7 on your Arduino.
+- Connect the servos to pins 5, 6, and 9 on your Arduino.
 - Connect the Arduino to your computer.
 - Uncomment the pyfirmata2 section in the code to enable servo control.
 - 
